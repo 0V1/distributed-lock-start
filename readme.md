@@ -24,19 +24,14 @@ redis的单线程执行特性将决定执行顺序，从而保证加锁的可靠
     Integer reply, 特定值:
     1 如果key被设置了
     0 如果key没有被设置
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/maven-plugin/)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications)
-* [Spring Data Redis (Access+Driver)](https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/htmlsingle/#boot-features-redis)
+
 
 ## zookeeper
 The following guides illustrate how to use some features concretely:
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
-* [Messaging with Redis](https://spring.io/guides/gs/messaging-redis/)
+TODO
 
 ## mysql
 使用悲观锁，select for update
 
+TODO
