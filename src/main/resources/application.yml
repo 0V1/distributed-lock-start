@@ -1,3 +1,4 @@
 spring:
   profiles:
-    active: redis
+    active: mysql
+debug: true

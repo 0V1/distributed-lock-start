@@ -1,0 +1,19 @@
+# mysql setting
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.216.128:3306/mysql-lock?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf8&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.hermes.distributedlockstart.pojo
+
+# showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug

@@ -24,7 +24,25 @@ redis的单线程执行特性将决定执行顺序，从而保证加锁的可靠
     Integer reply, 特定值:
     1 如果key被设置了
     0 如果key没有被设置
+* [redis 执行lua 脚本](https://docs.spring.io/spring-data/redis/docs/2.2.3.RELEASE/reference/html/#scripting)  
 
+checkandset.lua
+~~~
+local current = redis.call('GET', KEYS[1])
+if current == ARGV[1]
+  then redis.call('SET', KEYS[1], ARGV[2])
+  return true
+end
+return false
+~~~
+redisTemplate.execute
+~~~
+public boolean checkAndSet(String expectedValue, String newValue) {
+    ScriptSource scriptSource = new ResourceScriptSource(new ClassPathResource("META-INF/scripts/checkandset.lua");
+    RedisScript<Boolean> script = RedisScript.of(scriptSource, Boolean.class);
+    return redisTemplate.execute(script, singletonList("key"), asList(expectedValue, newValue));
+  }
+~~~
 
 ## zookeeper
 The following guides illustrate how to use some features concretely:
