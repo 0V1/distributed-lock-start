@@ -43,13 +43,30 @@ public boolean checkAndSet(String expectedValue, String newValue) {
     return redisTemplate.execute(script, singletonList("key"), asList(expectedValue, newValue));
   }
 ~~~
-
+#### 小结
+    redis 作为的分布式锁，简单高效，稳定，集群是可扩展至集群模式(Redisson)
+---
 ## zookeeper
-The following guides illustrate how to use some features concretely:
+使用zk的临时节点特性来实现，分布式锁
+* zk中的结构是由节点所组成，表现为文件目录的形式
+* 临时节点：客户端可以建立一个临时节点，全局唯一性，在会话结束时自动删除
+* 子节点：可以指定一个父节点，在下面创建子节点，这个时候父节点就相当于资源，临时子节点就相当于锁   
 
-TODO
+    
+#### Curator分布式锁实现
 
+---
 ## mysql
-使用悲观锁，select for update
+使用悲观锁（阻塞锁），select for update/commit
+    
+    mysql中锁分为乐观锁和悲观锁，乐观锁使用update version控制，悲观锁使用行锁或者表锁控制，
+    在这里选用行锁，一行信息即为一个资源，一旦有任一链接执行成功即视为获取锁，
+    其他链接执行将被阻塞，那么这里就需要设置一个查询超时，使其他没有获取到锁的链接及时释放，
+    不至于一直等待执行，同时也需要一个try catch来捕获查询超时的异常作为获取锁失败的标志。
+    这样使用有一个好处，就是不容易出现死锁，一旦事务执行完毕 必然释放锁，如果有任何异常导致链接断开
+    也会自动释放锁。
+####注意点：
+* 需要手动开启事务，手动提交，链接断开后自动自动释放事务
+* select for update 和 commit 一定要成对，手动事务容易形成开闭操作，那么就会有死锁
+* 一旦出现死锁最简单办法即使重启大法
 
-TODO
