@@ -55,6 +55,10 @@ public boolean checkAndSet(String expectedValue, String newValue) {
     
 #### Curator分布式锁实现
 
+curator-recipes下有locks包，提供了一些zookeeper的封装，提供了分布式锁的实现
+接口：InterProcessLock
+实现类：InterProcessMultiLock  |  InterProcessMutex  |  InterProcessSemaphoreMutex  |  InternalInterProcessMutex
+
 ---
 ## mysql
 使用悲观锁（阻塞锁），select for update/commit

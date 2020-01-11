@@ -10,5 +10,5 @@ public class DistributedLockConfig {
 
     private ZookeeperLockConfig zookeeperLock;
 
-    private MySQLLockConfig mySQLLock;
+    private MySqlLockConfig mySQLLock;
 }
