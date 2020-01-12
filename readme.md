@@ -59,6 +59,14 @@ curator-recipes下有locks包，提供了一些zookeeper的封装，提供了分
 接口：InterProcessLock
 实现类：InterProcessMultiLock  |  InterProcessMutex  |  InterProcessSemaphoreMutex  |  InternalInterProcessMutex
 
+##### 注意点：
+* 注意zk server端版本和client端版本的对应问题
+* zk 3.5.6新增ttl节点特性 可用于节点定时过期
+
+#### 小结
+    zookeeper 作为的分布式锁，有完成的现有解决方案，如果项目中已经在用zk的话，
+    可以适量考虑，性能上比redis 略差，简易度上中等
+
 ---
 ## mysql
 使用悲观锁（阻塞锁），select for update/commit
@@ -69,8 +77,12 @@ curator-recipes下有locks包，提供了一些zookeeper的封装，提供了分
     不至于一直等待执行，同时也需要一个try catch来捕获查询超时的异常作为获取锁失败的标志。
     这样使用有一个好处，就是不容易出现死锁，一旦事务执行完毕 必然释放锁，如果有任何异常导致链接断开
     也会自动释放锁。
-####注意点：
+#### 注意点：
 * 需要手动开启事务，手动提交，链接断开后自动自动释放事务
 * select for update 和 commit 一定要成对，手动事务容易形成开闭操作，那么就会有死锁
 * 一旦出现死锁最简单办法即使重启大法
 
+
+#### 小结
+    DB 作为的分布式锁，是性能最差的，实现起来也问题多多，稍有不慎，就会出问题，
+    只有在重重限制下才会使用，最不推荐的一种分布式锁
